@@ -3,11 +3,17 @@ if not app.isUIAvailable then
   return
 end
 
+-- Get current sprite
+local sprite = app.activeSprite
+
 -- Ensure a sprite is loaded
 if sprite == nil then
   app.alert("You must open a sprite first to use this script!")
   return
 end
+
+-- Get current layer
+local currentLayer = app.activeLayer
 
 -- Ensure the current layer is a valid one
 if not currentLayer.isImage or not currentLayer.isEditable then
