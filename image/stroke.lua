@@ -3,22 +3,24 @@ if not app.isUIAvailable then
   return
 end
 
--- Get current sprite
-local sprite = app.activeSprite
-
 -- Ensure a sprite is loaded
-if sprite == nil then
+if app.activeSprite == nil then
   app.alert("You must open a sprite first to use this script!")
   return
 end
 
--- Get current layer
-local currentLayer = app.activeLayer
-
 -- Ensure the current layer is a valid one
-if not currentLayer.isImage or not currentLayer.isEditable then
+if not app.activeLayer.isImage or not app.activeLayer.isEditable then
   app.alert("You must have an editable image layer selected!")
   return
+end
+
+-- Determines if a pixel has any data in it
+local function pixelHasData(pixel)
+  local rgbaAlpha = app.pixelColor.rgbaA(pixel)
+  local grayAlpha = app.pixelColor.grayaA(pixel)
+
+  return rgbaAlpha ~= 0 or grayAlpha ~= 0
 end
 
 -- Polyfil for active frame
@@ -49,14 +51,6 @@ local currentLayer = app.activeLayer
 local activeFrame = activeFrameNumber()
 local pixelColor = app.pixelColor
 local cel = getActiveCel(currentLayer, activeFrame)
-
--- Determines if a pixel has any data in it
-local function pixelHasData(pixel)
-  local rgbaAlpha = pixelColor.rgbaA(pixel)
-  local grayAlpha = pixelColor.grayaA(pixel)
-
-  return rgbaAlpha ~= 0 or grayAlpha ~= 0
-end
 
 -- Prepare the dialog
 local dlg = Dialog()
