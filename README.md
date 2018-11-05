@@ -12,3 +12,6 @@ Overwrites all non-transparent pixels in the current layer with any given color/
 
 ### image/stroke.lua
 Outlines all non-transparent pixels in the current layer with any color and width. Can be applied to the current layer or to a new layer. 
+
+### timeline/add-frame-background.lua
+Adds a new frame to the timeline, copying cels from every layer but the active one. Useful when working on animations with a background.
