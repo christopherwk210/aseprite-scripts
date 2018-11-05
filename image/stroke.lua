@@ -1,3 +1,20 @@
+-- Ensure we can use UI stuff
+if not app.isUIAvailable then
+  return
+end
+
+-- Ensure a sprite is loaded
+if sprite == nil then
+  app.alert("You must open a sprite first to use this script!")
+  return
+end
+
+-- Ensure the current layer is a valid one
+if not currentLayer.isImage or not currentLayer.isEditable then
+  app.alert("You must have an editable image layer selected!")
+  return
+end
+
 -- Polyfil for active frame
 local function activeFrameNumber()
   local f = app.activeFrame
@@ -33,23 +50,6 @@ local function pixelHasData(pixel)
   local grayAlpha = pixelColor.grayaA(pixel)
 
   return rgbaAlpha ~= 0 or grayAlpha ~= 0
-end
-
--- Ensure we can use UI stuff
-if not app.isUIAvailable then
-  return
-end
-
--- Ensure a sprite is loaded
-if sprite == nil then
-  app.alert("You must open a sprite first to use this script!")
-  return
-end
-
--- Ensure the current layer is a valid one
-if not currentLayer.isImage or not currentLayer.isEditable then
-  app.alert("You must have an editable image layer selected!")
-  return
 end
 
 -- Prepare the dialog
