@@ -80,6 +80,12 @@ if not data.currentLayer and not data.newLayer then
   return
 end
 
+-- Get original image coordinates
+local imageCoords = {
+  x = cel.bounds.x,
+  y = cel.bounds.y
+}
+
 -- Get the original image and clone it
 local image = cel.image
 local copy = image:clone()
@@ -101,8 +107,10 @@ app.transaction(
     if data.newLayer then
       local newLayer = sprite:newLayer()
       cel = sprite:newCel(newLayer, activeFrame)
+      cel.image = copy
+      cel.position = imageCoords
+    else
+      cel.image:putImage(copy)
     end
-
-    cel.image:putImage(copy)
   end
 )
