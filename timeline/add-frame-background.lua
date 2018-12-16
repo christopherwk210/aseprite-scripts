@@ -23,7 +23,7 @@ local function pixelHasData(pixel)
   return rgbaAlpha ~= 0 or grayAlpha ~= 0
 end
 
--- Polyfil for active frame
+-- Polyfill for active frame
 local function activeFrameNumber()
   local f = app.activeFrame
   if f == nil then
